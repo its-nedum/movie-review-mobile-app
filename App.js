@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import Home from './components/pages/Home';
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback } from 'react';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  // load custom fonts
+  const [fontsLoaded] = useFonts({
+    'nunito-regular': require("./assets/fonts/Nunito-Regular.ttf"),
+    'nunito-bold': require("./assets/fonts/Nunito-Bold.ttf")
+  });
+
+  // setup layout to handle display of splash screen until fonts are loaded
+  const onLayoutRootView = useCallback(async () => {
+    if(fontsLoaded){
+      await SplashScreen.hideAsync()
+    }
+  },[fontsLoaded]);
+
+  if(!fontsLoaded) return null
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+        <Home 
+          onLayoutRootView={onLayoutRootView} 
+        />  
+      );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
