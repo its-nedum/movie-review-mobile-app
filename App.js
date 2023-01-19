@@ -1,7 +1,8 @@
-import Home from './components/pages/Home';
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from 'react';
+import { NavigationContainer } from "@react-navigation/native";
+import NavigationStack from "./routes/NavigationStack";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,9 +23,9 @@ export default function App() {
   if(!fontsLoaded) return null
 
   return (
-        <Home 
-          onLayoutRootView={onLayoutRootView} 
-        />  
+        <NavigationContainer onReady={onLayoutRootView}>
+          <NavigationStack />
+        </NavigationContainer>
+         
       );
 }
-

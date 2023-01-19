@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Button } from 'react-native'
 import { globalStyles } from '../../styles/global'
 
-const Home = ({ onLayoutRootView }) => {
+const Home = ({ navigation }) => {
   return (
-    <View style={globalStyles.container} onLayout={onLayoutRootView}>
+    <View style={globalStyles.container}>
         <Text style={globalStyles.titleText}>Home Page</Text>
+        <Button title='next page' onPress={() => navigation.navigate('Review')}/>
     </View>
   )
 }
