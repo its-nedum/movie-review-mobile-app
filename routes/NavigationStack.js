@@ -12,12 +12,24 @@ const NavigationStack = () => {
         <Stack.Screen 
           name='Home' 
           component={Home} 
-          options={{title: 'Home'}}
+          options={{
+            title: 'Movie Review', 
+            headerTintColor: "#fff",
+            headerStyle: {
+              backgroundColor: '#286972',
+            }
+          }}
         />
         <Stack.Screen 
           name='Review' 
           component={Review} 
-          options={{title: 'Review details'}}
+          options={{
+            title: 'Review details',
+            headerTintColor: "#fff",
+            headerStyle: {
+              backgroundColor: '#286972',
+            }
+          }}
         />
       </Stack.Group>
     </Stack.Navigator>

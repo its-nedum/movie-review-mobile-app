@@ -2,10 +2,13 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { globalStyles } from '../../styles/global'
 
-const Review = () => {
+const Review = ({ navigation, route }) => {
+  const single = route.params;
   return (
     <View style={globalStyles.container}>
-        <Text>Review Page</Text>
+        <Text>{single.title}</Text>
+        <Text>{single.text}</Text>
+        <Text>{single.rating}</Text>
     </View>
   )
 }
