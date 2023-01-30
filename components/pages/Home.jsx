@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
           data={movies}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate("Review", item)}>
+            <TouchableOpacity onPress={() => navigation.navigate("Review Details", item)}>
                 <Text style={globalStyles.titleText}>{item.title}</Text>
             </TouchableOpacity>
           )}

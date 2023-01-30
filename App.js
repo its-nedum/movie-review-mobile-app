@@ -1,12 +1,17 @@
+import "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from 'react';
-import { NavigationContainer } from "@react-navigation/native";
-import NavigationStack from "./routes/NavigationStack";
+import { NavigationContainer, useNavigationContainerRef } from "@react-navigation/native";
+import NavigationStack from "./routes/Drawer";
+import { useState } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const navigationRef = useNavigationContainerRef();
+  const [isReviewDetailsPage, setIsReviewDetailsPage] = useState(false)
+
   // load custom fonts
   const [fontsLoaded] = useFonts({
     'nunito-regular': require("./assets/fonts/Nunito-Regular.ttf"),
@@ -23,8 +28,19 @@ export default function App() {
   if(!fontsLoaded) return null
 
   return (
-        <NavigationContainer onReady={onLayoutRootView}>
-          <NavigationStack />
+        <NavigationContainer 
+          ref={navigationRef}
+          onReady={onLayoutRootView}
+          onStateChange={async () => {
+            const currentRouteName = navigationRef.getCurrentRoute().name;
+            if(currentRouteName === 'Review Details'){
+              setIsReviewDetailsPage(true)
+            }else{
+              setIsReviewDetailsPage(false)
+            }
+          }}  
+        >
+          <NavigationStack isReviewDetailsPage={isReviewDetailsPage}/>
         </NavigationContainer>
          
       );
