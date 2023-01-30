@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, Button, FlatList, TouchableOpacity } from 'react-native'
-import { globalStyles } from '../../styles/global'
+import { Text, FlatList, TouchableOpacity, ImageBackground } from 'react-native'
+import { globalStyles, images } from '../../styles/global'
+import Card from '../shared/Card'
 
 const Home = ({ navigation }) => {
   const [movies, setMovies] = useState([
@@ -11,17 +12,19 @@ const Home = ({ navigation }) => {
     {id: 5, title: "Thunder Force", rating: 1, text: "It's funny sha"}
   ])
   return (
-    <View style={globalStyles.container}>
+    <ImageBackground source={images.background.page} style={globalStyles.container}>
         <FlatList 
           data={movies}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => navigation.navigate("Review Details", item)}>
+              <Card>
                 <Text style={globalStyles.titleText}>{item.title}</Text>
+              </Card>
             </TouchableOpacity>
           )}
         />
-    </View>
+    </ImageBackground>
   )
 }
 
